@@ -48,6 +48,8 @@ public class AppWumpus {
       tk.writeBoard(finalCave, score, status);
       
       tk.stop();
+      
+      //teste de git
    }
 
 }
