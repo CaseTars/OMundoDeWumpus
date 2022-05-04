@@ -49,7 +49,7 @@ public class AppWumpus {
       
       tk.stop();
       
-      //teste 2
+      //teste casa
    }
 
 }
