@@ -1,4 +1,5 @@
 package pt.c40task.l05wumpus;
+import java.util.Scanner;
 
 public class AppWumpus {
 
@@ -14,6 +15,8 @@ public class AppWumpus {
                                   String arquivoMovimentos) {
       Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
       
+      
+      //Construcao
       String cave[][] = tk.retrieveCave();
       System.out.println("=== Caverna");
       for (int l = 0; l < cave.length; l++) {
@@ -21,36 +24,44 @@ public class AppWumpus {
             System.out.print(cave[l][c] + ((c < cave[l].length-1) ? ", " : ""));
          System.out.println();
       }
+      MontadorDaCaverna bobMontador = new MontadorDaCaverna(cave);
       
-      String movements = tk.retrieveMovements();
-      System.out.println("=== Movimentos");
-      System.out.println(movements);
-      
-      System.out.println("=== Caverna Intermediaria");
-      char partialCave[][] = {
-         {'#', '#', 'b', '-'},
-         {'#', 'b', '-', '-'},
-         {'b', '-', '-', '-'},
-         {'p', '-', '-', '-'}
-      };
-      int score = -120;
-      char status = 'x'; // 'w' para venceu; 'n' para perdeu; 'x' intermediárias
-      tk.writeBoard(partialCave, score, status);
+      ControleDoJogo controle = new ControleDoJogo();
 
-      System.out.println("=== Última Caverna");
-      char finalCave[][] = {
-         {'#', '#', 'b', '-'},
-         {'#', 'b', '#', 'f'},
-         {'b', '-', '-', 'w'},
-         {'#', '-', '-', '-'}
-      };
-      score = -1210;
-      status = 'n'; // 'w' para venceu; 'n' para perdeu; 'x' intermediárias
-      tk.writeBoard(finalCave, score, status);
-      
+	  char command;
+	  
+      if(arquivoMovimentos == null) { //modo interativo
+    	  Scanner keyboard = new Scanner(System.in);
+    	  Impressao.pegarNome();
+    	  controle.setNome(keyboard.nextLine());
+    	  
+    	  while(controle.rodando()) {
+    		  command = keyboard.nextLine().charAt(0);
+    		  int erro = controle.executa(command);
+    		  if(erro != 0) {
+    			  Impressao.mensagem("Movimento Inválido!");
+    			  continue;
+    		  }
+    		  Impressao.jogo(controle);
+    	  }
+      }
+      else { // modo arquivo
+    	  String movements = tk.retrieveMovements();
+    	  int caracAtual = 0;
+    	  controle.setNome("Alcebiades");
+    	  
+    	  while(controle.rodando()) {
+    		  command = movements.charAt(caracAtual++);
+    		  int erro = controle.executa(command);
+    		  if(erro != 0)
+    			  continue;
+    		  char cave[][] = controle.caverna();
+    		  int score = controle.score();
+    		  char status = controle.status();
+    		  tk.writeBoard(cave, score, status);
+    	  }
+      }
       tk.stop();
-      
-      //teste casa
    }
 
 }
