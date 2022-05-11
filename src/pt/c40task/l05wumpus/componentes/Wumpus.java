@@ -1,8 +1,6 @@
 package pt.c40task.l05wumpus.componentes;
 
-import pt.c40task.l05wumpus.Componente;
-
-public class Wumpus extends Componente {
+public class Wumpus extends SerVivo {
 
 	public Wumpus(int x, int y) {
 		super(x, y, 'W', 3);
@@ -21,14 +19,11 @@ public class Wumpus extends Componente {
 	public void interagir(Heroi heroi) {
 		if(heroi.getFlechaArmada()) { // Heroi com flecha armada 
 			boolean acertouTiro = Math.random() > 0.5 ? true : false;
-			if(acertouTiro)
+			if(acertouTiro) {
 				this.matar();
-			else
-				heroi.matar();
+				return;
+			}
 		}
-		else {	// Heroi sem flecha armada
-			heroi.matar();
-		}
+		heroi.matar(); // sem flecha aramaada ou perdeu na batalha
 	}
-
 }

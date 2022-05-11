@@ -1,7 +1,5 @@
 package pt.c40task.l05wumpus.componentes;
 
-import pt.c40task.l05wumpus.Componente;
-
 public class Fedor extends Componente {
 	
 	public Fedor(int x, int y) {
