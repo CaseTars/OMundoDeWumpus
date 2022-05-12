@@ -1,5 +1,7 @@
 package pt.c40task.l05wumpus;
 import pt.c40task.l05wumpus.componentes.Heroi;
+import pt.c40task.l05wumpus.componentes.Componente;
+
 
 public class Salas {
 	private Componente[] vComponentes;
@@ -15,7 +17,7 @@ public class Salas {
 		this.tamVetor = 0;
 	}
 	
-	public boolean inserirComponente(Componente aInserir) { 
+	public boolean inserirComponenteInicial(Componente aInserir) { 
 		boolean saida = true;
 		if(!temComponentes) {
 			this.vComponentes[posVetor] = aInserir;
@@ -45,6 +47,10 @@ public class Salas {
 			}
 		}
 		return saida;
+	}
+	
+	public void inserirDurante(Componente aInserir) {
+		
 	}
 	
 	public void interagir(Heroi heroi) {  //vai interagir cm td mundo?

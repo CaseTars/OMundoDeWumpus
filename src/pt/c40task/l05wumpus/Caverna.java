@@ -1,4 +1,5 @@
 package pt.c40task.l05wumpus;
+import pt.c40task.l05wumpus.componentes.Componente;
 
 public class Caverna {
 	private Salas[][] sala;
@@ -16,7 +17,7 @@ public class Caverna {
 	}
 	
 	public boolean inserir(Componente aInserir, int posX, int posY) { //retorno?
-		if(sala[posX][posY].inserirComponente(aInserir)) {
+		if(sala[posX][posY].inserirComponenteInicial(aInserir)) {
 			return true;
 		}
 		else {
@@ -24,8 +25,8 @@ public class Caverna {
 		}
 	}
 	
-	public void mover() { //talvez precise de retorno se caso o movimento for invalido
-		
+	public void mover(Componente heroi, int posX, int posY) { //talvez precise de retorno se caso o movimento for invalido
+		this.sala[posX][posY].
 	}
 	
 	public void interagir() { //retornar resultados neh

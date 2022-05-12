@@ -48,7 +48,7 @@ public class AppWumpus {
     			  Impressao.mensagem("Movimento Inválido!");
     			  continue;
     		  }
-    		  Impressao.jogo(controle);
+    		  Impressao.caverna(controle.getCaverna());
     	  }
     	  keyboard.close();
       }

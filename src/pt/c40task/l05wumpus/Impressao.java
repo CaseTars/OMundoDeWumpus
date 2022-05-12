@@ -1,7 +1,7 @@
 package pt.c40task.l05wumpus;
 
 public class Impressao {
-	public static void jogo(ControleDoJogo controle) {
+	public static void caverna(Char[][] caverna) {
 		
 	}
 	public static void mensagem(String mensagem) {
