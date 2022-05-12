@@ -26,8 +26,14 @@ public class AppWumpus {
       }
       MontadorDaCaverna bobMontador = new MontadorDaCaverna(cave);
       
+      if(bobMontador.montar()) { //so vai funcionar o jogo se isso der bom, colocar mensagens de erros e tals
+    	  
+      }
+      
+      //Execucao
       ControleDoJogo controle = new ControleDoJogo();
-
+      controle.conectaHeroi(bobMontador.getHeroi());
+      
 	  char command;
 	  
       if(arquivoMovimentos == null) { //modo interativo
@@ -35,7 +41,7 @@ public class AppWumpus {
     	  Impressao.pegarNome();
     	  controle.setNome(keyboard.nextLine());
     	  
-    	  while(controle.rodando()) {
+    	  while(controle.getRodando()) {
     		  command = keyboard.nextLine().charAt(0);
     		  int erro = controle.executa(command);
     		  if(erro != 0) {
@@ -44,21 +50,22 @@ public class AppWumpus {
     		  }
     		  Impressao.jogo(controle);
     	  }
+    	  keyboard.close();
       }
       else { // modo arquivo
     	  String movements = tk.retrieveMovements();
     	  int caracAtual = 0;
     	  controle.setNome("Alcebiades");
     	  
-    	  while(controle.rodando()) {
+    	  while(controle.getRodando()) {
     		  command = movements.charAt(caracAtual++);
     		  int erro = controle.executa(command);
     		  if(erro != 0)
     			  continue;
-    		  char cave[][] = controle.caverna();
-    		  int score = controle.score();
-    		  char status = controle.status();
-    		  tk.writeBoard(cave, score, status);
+    		  char caverna[][] = controle.getCaverna();
+    		  int score = controle.getScore();
+    		  char status = controle.getStatus();
+    		  tk.writeBoard(caverna, score, status);
     	  }
       }
       tk.stop();
