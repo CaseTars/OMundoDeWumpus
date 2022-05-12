@@ -11,7 +11,7 @@ public class Wumpus extends SerVivo {
 		for(int dy = -1; dy <= 1; dy++) {
 			if(dx == 0 && dy == 0) continue; // sem fedor na posicao do Wumpus
 			Fedor fedor = new Fedor(getX() + dx, getY() + dy);
-			getCaverna().adicionarElemento(fedor);
+			getCaverna().inserir(fedor);
 		}
 	}
 

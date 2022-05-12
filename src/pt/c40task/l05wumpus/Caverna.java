@@ -1,5 +1,6 @@
 package pt.c40task.l05wumpus;
 import pt.c40task.l05wumpus.componentes.Componente;
+import pt.c40task.l05wumpus.componentes.Heroi;
 
 public class Caverna {
 	private Salas[][] sala;
@@ -16,20 +17,29 @@ public class Caverna {
 		this.sala = salas;
 	}
 	
-	public boolean inserir(Componente aInserir, int posX, int posY) { //retorno?
-		if(sala[posX][posY].inserirComponenteInicial(aInserir)) {
-			return true;
-		}
-		else {
+	public boolean inserir(Componente aInserir) { 
+		if(aInserir.getX() < 0 || aInserir.getX() > 3 || aInserir.getY() < 0 || aInserir.getY() > 3 ) {
 			return false;
 		}
+		return sala[aInserir.getX()][aInserir.getY()].inserir(aInserir);
 	}
 	
-	public void mover(Componente heroi, int posX, int posY) { //talvez precise de retorno se caso o movimento for invalido
-		this.sala[posX][posY].
+	public void mover(Heroi heroi, int posX, int posY) { //talvez precise de retorno se caso o movimento for invalido
+		sala[heroi.getX()][heroi.getY()].sair();
+		sala[posX][posY].entrar(heroi);
 	}
 	
-	public void interagir() { //retornar resultados neh
-		
+	public void interagir(Heroi heroi) { //retornar resultados neh
+		sala[heroi.getX()][heroi.getY()].interagir();
+	}
+	
+	public char[][] getMapa(){
+		char[][] mapa = new char[4][4];
+		for(int x=0;x < 4;x++) {
+			for(int y=0;y < 4;y++) {
+				mapa[x][y] = sala[x][y].getSimbolo();
+			}
+		}
+		return mapa;
 	}
 }

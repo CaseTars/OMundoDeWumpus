@@ -12,14 +12,17 @@ public class Heroi extends SerVivo {
 	
 	@Override
 	public void interagir(Heroi heroi) {
-		// Heroi não interagi com si propio
+		// Heroi nï¿½o interagi com si propio
 	}
 	
 	// --------------------------------- Movimentacao
-	@Override
+
 	public void mover(int xf, int yf) {
-		super.mover(xf, yf);
-		cave.interagir();
+		cave.mover(this, xf, yf);
+		x = xf;
+		y = yf;
+		
+		cave.interagir(this);
 		
 		if(flechaArmada) {
 			temFlecha = false;
@@ -27,7 +30,9 @@ public class Heroi extends SerVivo {
 		}
 	}
 	
-	public void mover(char tecla) {
+	public boolean mover(char tecla) {
+		int xi = getX(),
+		    yi = getY();
 		switch(Character.toLowerCase(tecla)) {
 		case 'w':
 			if(getY() > 0)
@@ -46,6 +51,7 @@ public class Heroi extends SerVivo {
 				mover(getX() + 1, getY());
 			break;
 		}
+		return xi != getX() || yi != getY(); // retorna true se a posicao final eh diferente da inicial
 	}
 	
 	//------------------------------ Flecha
@@ -61,7 +67,7 @@ public class Heroi extends SerVivo {
 	// -------------------------------- Ouro
 	public void pegarOuro() {
 		pegandoOuro = true;
-		getCaverna().interagir();
+		getCaverna().interagir(this);
 		pegandoOuro = false;
 	}
 	

@@ -3,7 +3,7 @@ package pt.c40task.l05wumpus.componentes;
 import pt.c40task.l05wumpus.Caverna;
 
 public abstract class Componente {
-	private int x, y;
+	protected int x, y;
 	protected Caverna cave;
 	private char simbolo;
 	private int prioridadeSimbolo;
@@ -37,13 +37,6 @@ public abstract class Componente {
 	
 	public int getPrioridade() {
 		return prioridadeSimbolo;
-	}
-	
-
-	public void mover(int xf, int yf) {
-		cave.mover(this, xf, yf);
-		x = xf;
-		y = yf;
 	}
 	
 	public abstract void interagir(Heroi heroi);

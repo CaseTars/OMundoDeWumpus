@@ -11,7 +11,7 @@ public class Buraco extends Componente {
 		for(int dy = -1; dy <= 1; dy++) {
 			if(dx == 0 && dy == 0) continue; // sem brisa na posicao do Buraco
 			Brisa brisa = new Brisa(getX() + dx, getY() + dy);
-			getCaverna().adicionarElemento(brisa);
+			getCaverna().inserir(brisa);
 		}
 	}
 

@@ -26,47 +26,48 @@ public class AppWumpus {
       }
       MontadorDaCaverna bobMontador = new MontadorDaCaverna(cave);
       
-      if(bobMontador.montar()) { //so vai funcionar o jogo se isso der bom, colocar mensagens de erros e tals
+      if(bobMontador.montar()) { 
+          ControleDoJogo controle = new ControleDoJogo();
+          controle.conectaHeroi(bobMontador.getHeroi());
+          controle.conectaWumpus(bobMontador.getWumpus());
+          
+    	  char command;
     	  
+          if(arquivoMovimentos == null) { //modo interativo
+        	  Scanner keyboard = new Scanner(System.in);
+        	  Impressao.pegarNome();
+        	  controle.setNome(keyboard.nextLine());
+        	  Impressao.caverna(controle.getCaverna());
+        	  while(controle.getRodando()) {
+        		  command = keyboard.nextLine().charAt(0);
+        		  int erro = controle.executa(command);
+        		  if(erro != 0) {
+        			  Impressao.mensagem("Movimento Inválido!");
+        			  continue;
+        		  }
+        		  Impressao.caverna(controle.getCaverna());
+        	  }
+        	  keyboard.close();
+          }
+          else { // modo arquivo
+        	  String movements = tk.retrieveMovements();
+        	  int caracAtual = 0;
+        	  controle.setNome("Alcebiades");
+        	  
+        	  while(controle.getRodando()) {
+        		  command = movements.charAt(caracAtual++);
+        		  int erro = controle.executa(command);
+        		  if(erro != 0)
+        			  continue;
+        		  char caverna[][] = controle.getCaverna();
+        		  int score = controle.getScore();
+        		  char status = controle.getStatus();
+        		  tk.writeBoard(caverna, score, status);
+        	  }
+          }
       }
-      
-      //Execucao
-      ControleDoJogo controle = new ControleDoJogo();
-      controle.conectaHeroi(bobMontador.getHeroi());
-      
-	  char command;
-	  
-      if(arquivoMovimentos == null) { //modo interativo
-    	  Scanner keyboard = new Scanner(System.in);
-    	  Impressao.pegarNome();
-    	  controle.setNome(keyboard.nextLine());
-    	  
-    	  while(controle.getRodando()) {
-    		  command = keyboard.nextLine().charAt(0);
-    		  int erro = controle.executa(command);
-    		  if(erro != 0) {
-    			  Impressao.mensagem("Movimento Inválido!");
-    			  continue;
-    		  }
-    		  Impressao.caverna(controle.getCaverna());
-    	  }
-    	  keyboard.close();
-      }
-      else { // modo arquivo
-    	  String movements = tk.retrieveMovements();
-    	  int caracAtual = 0;
-    	  controle.setNome("Alcebiades");
-    	  
-    	  while(controle.getRodando()) {
-    		  command = movements.charAt(caracAtual++);
-    		  int erro = controle.executa(command);
-    		  if(erro != 0)
-    			  continue;
-    		  char caverna[][] = controle.getCaverna();
-    		  int score = controle.getScore();
-    		  char status = controle.getStatus();
-    		  tk.writeBoard(caverna, score, status);
-    	  }
+      else { //arquivo zuado
+    	  Impressao.mensagem("Erro");
       }
       tk.stop();
    }

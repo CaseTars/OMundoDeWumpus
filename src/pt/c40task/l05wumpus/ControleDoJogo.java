@@ -1,45 +1,56 @@
 package pt.c40task.l05wumpus;
 import pt.c40task.l05wumpus.componentes.Heroi;
+import pt.c40task.l05wumpus.componentes.Wumpus;
 
 public class ControleDoJogo {
 	private String nomeJogador;
 	private int pontuacao;
 	private char status;
-	private boolean rodando;	
+	private boolean rodando;
+	private boolean wumpusMorto;
 	private Heroi heroi;
+	private Wumpus wumpus;
 	
 	public ControleDoJogo() {
 		this.pontuacao = 0;
 		this.rodando = true;
+		this.wumpusMorto = false;
 	}
 	
 	public int executa(char command) { 
-		if(command == 'w' || command == 's' || command == 'a' || command == 'd') { //pontos matar wumpus, 
-			if(heroi.mover(command)) { //pegar retorno
+		command = Character.toLowerCase(command);
+		if(command == 'w' || command == 's' || command == 'a' || command == 'd') { 
+			if(heroi.getFlechaArmada()) {
+				pontuacao += -100; 
+			}
+			if(heroi.mover(command)) { 
 				pontuacao += -15;
+			}
+			if(!wumpus.getVivo() && !wumpusMorto) {
+				pontuacao += 500;
+				wumpusMorto = true;
 			}
 		}
 		if(command == 'k') {
-			if(heroi.armarFlecha()) {
-				pontuacao += -100; //ou esperar proximo movimento??
-			}
+			heroi.armarFlecha();
 		}
 		if(command == 'c') {
-			if(heroi.pegarOuro()) { //pegar retorno se deu bom, pra pontuacao
-				pontuacao += 
-			}
+			heroi.pegarOuro();
 		}
 		if(command == 'q') {
-			heroi.sairJogo(); // jogo pd acabar antes??
-			if(heroi.carregandoOuro()) {
+			if(heroi.carregandoOuro() && heroi.getX() == 0 && heroi.getY() == 0) {
 				pontuacao += 1000;
 			}
-			rodando = false; // tem a questao se tiver com o ouro a
+			rodando = false; 
+		}
+		if(!heroi.getVivo()){
+			pontuacao += -1000;
+			rodando = false;
 		}
 		return 0;
 	}
 	
-	public boolean getRodando() { // qndo alterar 
+	public boolean getRodando() { 
 		return rodando;
 	}
 	
@@ -55,12 +66,16 @@ public class ControleDoJogo {
 		return pontuacao;
 	}
 	
-	public char[][] getCaverna(){ //iterar sobre a caverna e salas e imprimir a galera toda, pegar caverna com o heroi
-		char[][] caverna = heroi.getCaverna();
+	public char[][] getCaverna(){ 
+		char[][] caverna = heroi.getCaverna().getMapa();
 		return caverna;
 	}
 	
 	public void conectaHeroi(Heroi heroi) {
 		this.heroi = heroi;
+	}
+	
+	public void conectaWumpus(Wumpus wumpus) {
+		this.wumpus = wumpus;
 	}
 }
