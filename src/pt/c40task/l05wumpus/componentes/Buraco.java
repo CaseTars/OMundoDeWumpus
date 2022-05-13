@@ -7,11 +7,10 @@ public class Buraco extends Componente {
 	}
 	
 	public void criaBrisa() {
-		for(int dx = -1; dx <= 1; dx++)
-		for(int dy = -1; dy <= 1; dy++) {
-			if(dx == 0 && dy == 0) continue; // sem brisa na posicao do Buraco
-			Brisa brisa = new Brisa(getX() + dx, getY() + dy);
-			getCaverna().inserir(brisa);
+		int[][] dpos = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+		for(int i = 0; i<dpos.length; i++) {
+			Brisa brisa = new Brisa(getX() + dpos[i][0], getY() +  dpos[i][1]);
+			getCaverna().inserirCompInicial(brisa);
 		}
 	}
 

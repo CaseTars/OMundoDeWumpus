@@ -11,6 +11,7 @@ public class Ouro extends Componente {
 	@Override
 	public void interagir(Heroi heroi) {
 		if(!heroi.getPegandoOuro()) return;
+		cave.remover(this);
 		heroi.setOuro(this);
 		heroiCarregando = heroi;
 	}

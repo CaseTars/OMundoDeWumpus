@@ -12,7 +12,7 @@ public class Heroi extends SerVivo {
 	
 	@Override
 	public void interagir(Heroi heroi) {
-		// Heroi n�o interagi com si propio
+		// Heroi nao interagi com si propio
 	}
 	
 	// --------------------------------- Movimentacao

@@ -7,11 +7,10 @@ public class Wumpus extends SerVivo {
 	}
 	
 	public void criaFedor() {
-		for(int dx = -1; dx <= 1; dx++)
-		for(int dy = -1; dy <= 1; dy++) {
-			if(dx == 0 && dy == 0) continue; // sem fedor na posicao do Wumpus
-			Fedor fedor = new Fedor(getX() + dx, getY() + dy);
-			getCaverna().inserir(fedor);
+		int[][] dpos = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+		for(int i = 0; i<dpos.length; i++) {
+			Fedor fedor = new Fedor(getX() + dpos[i][0], getY() +  dpos[i][1]);
+			getCaverna().inserirCompInicial(fedor);
 		}
 	}
 

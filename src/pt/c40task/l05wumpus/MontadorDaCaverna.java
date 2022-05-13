@@ -27,32 +27,32 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 			criarCaverna();		
 			
 			for(int i=0;i < cave.length;i++) {
-				int posX = Integer.parseInt(cave[i][0]) -1;  
-				int posY = Integer.parseInt(cave[i][1]) -1;
+				int posX = Integer.parseInt(cave[i][1]) -1;  
+				int posY = Integer.parseInt(cave[i][0]) -1;
 				
 				switch(cave[i][2]) {
 					case "P":
 						this.heroi = new Heroi(posX, posY); 
 						this.heroi.conectaCaverna(caverna);
-						saida = caverna.inserir(heroi); 
+						saida = caverna.inserirCompInicial(heroi); 
 						break;
 					case "O":
 						this.ouro = new Ouro(posX, posY);  
 						this.ouro.conectaCaverna(caverna);
-						saida = caverna.inserir(ouro);
+						saida = caverna.inserirCompInicial(ouro);
 						break;
 					case "B":
 						this.buracos[posBuracos] = new Buraco(posX, posY);
 						this.buracos[posBuracos].conectaCaverna(caverna);
 						this.buracos[posBuracos].criaBrisa();
-						saida = caverna.inserir(buracos[posBuracos]); 
+						saida = caverna.inserirCompInicial(buracos[posBuracos]); 
 						posBuracos += 1;
 						break;
 					case "W":
 						this.wumpus = new Wumpus(posX, posY);
 						this.wumpus.conectaCaverna(caverna);
 						this.wumpus.criaFedor();
-						saida = caverna.inserir(wumpus);
+						saida = caverna.inserirCompInicial(wumpus);
 						break;
 					default:
 						break;
@@ -73,8 +73,8 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 		int posY;
 		
 		for(int i=0;i < cave.length;i++) {
-			posX = Integer.parseInt(cave[i][0]);  
-			posY = Integer.parseInt(cave[i][1]);
+			posX = Integer.parseInt(cave[i][1]);  
+			posY = Integer.parseInt(cave[i][0]);
 			conferirPos(posX, posY);
 			
 			switch(cave[i][2]) {
