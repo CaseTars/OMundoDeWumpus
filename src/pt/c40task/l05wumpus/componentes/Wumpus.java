@@ -17,7 +17,8 @@ public class Wumpus extends SerVivo {
 	@Override
 	public void interagir(Heroi heroi) {
 		if(heroi.getFlechaArmada()) { // Heroi com flecha armada 
-			boolean acertouTiro = Math.random() > 0.5 ? true : false;
+			//boolean acertouTiro = Math.random() > 0.5 ? true : false;
+			boolean acertouTiro = true;
 			if(acertouTiro) {
 				this.matar();
 				return;

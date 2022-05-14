@@ -18,12 +18,6 @@ public class AppWumpus {
       
       //Construcao
       String cave[][] = tk.retrieveCave();
-      System.out.println("=== Caverna");
-      for (int l = 0; l < cave.length; l++) {
-         for (int c = 0; c < cave[l].length; c++)
-            System.out.print(cave[l][c] + ((c < cave[l].length-1) ? ", " : ""));
-         System.out.println();
-      }
       MontadorDaCaverna bobMontador = new MontadorDaCaverna(cave);
       
       if(bobMontador.montar()) { 
@@ -37,7 +31,9 @@ public class AppWumpus {
         	  Scanner keyboard = new Scanner(System.in);
         	  Impressao.pegarNome();
         	  controle.setNome(keyboard.nextLine());
-        	  Impressao.caverna(controle.getCaverna());
+        	  
+        	  Impressao.estado(controle.getCaverna(), controle.getNome(), controle.getScore());
+
         	  while(controle.getRodando()) {
         		  command = keyboard.nextLine().charAt(0);
         		  int erro = controle.executa(command);
@@ -45,8 +41,9 @@ public class AppWumpus {
         			  Impressao.mensagem("Movimento Inválido!");
         			  continue;
         		  }
-        		  Impressao.caverna(controle.getCaverna());
+        		  Impressao.estado(controle.getCaverna(), controle.getNome(), controle.getScore());
         	  }
+        	  Impressao.mensagem("Volte sempre!! ;)");
         	  keyboard.close();
           }
           else { // modo arquivo
