@@ -1,5 +1,7 @@
 package pt.c40task.l05wumpus.componentes;
 
+import pt.c40task.l05wumpus.Impressao;
+
 public class Heroi extends SerVivo {
 	private boolean temFlecha = true;
 	private boolean flechaArmada = false;
@@ -21,9 +23,9 @@ public class Heroi extends SerVivo {
 		super.mover(xf, yf);
 		cave.interagir(this);
 		
-		if(flechaArmada) {
-			temFlecha = false;
-			flechaArmada = false;
+		if(flechaArmada) { // Se a flecha ainda estiver armada apos a interacao com os elementos da sala
+			atirarFlecha();
+			Impressao.adicionaMensagem("Voce atira sua unica flecha no nada.");
 		}
 	}
 	
@@ -53,18 +55,31 @@ public class Heroi extends SerVivo {
 	
 	//------------------------------ Flecha
 	public void armarFlecha() {
-		if(temFlecha) 
+		if(temFlecha) {
 			flechaArmada = true;
+			Impressao.adicionaMensagem("Voce arma sua flecha.");
+		} else
+			Impressao.adicionaMensagem("Voce nao tem flecha para armar.");
+	}
+	
+	public void atirarFlecha() {
+		if(!flechaArmada) return;
+		temFlecha = false;
+		flechaArmada = false;
 	}
 	
 	public boolean getFlechaArmada() {
 		return flechaArmada;
 	}
 	
+	public boolean getTemFlecha() {
+		return temFlecha;
+	}
+	
 	// -------------------------------- Ouro
 	public void pegarOuro() {
 		pegandoOuro = true;
-		getCaverna().interagir(this);
+		cave.interagir(this);
 		pegandoOuro = false;
 	}
 	
@@ -80,13 +95,14 @@ public class Heroi extends SerVivo {
 		this.ouro = ouro;
 	}
 	
-	public char[][] getMapa() {
-		return cave.getMapa();
-	}
-	
 	public boolean carregandoOuro() {
 		if(ouro == null)
 			return false;
 		return true;
+	}
+	
+	// ------------------------- Mapa
+	public char[][] getMapa() {
+		return cave.getMapa();
 	}
 }

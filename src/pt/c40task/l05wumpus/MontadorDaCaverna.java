@@ -115,6 +115,7 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 	public Heroi getHeroi() {
 		return heroi;
 	}
+	
 	public Wumpus getWumpus() {
 		return wumpus;
 	}

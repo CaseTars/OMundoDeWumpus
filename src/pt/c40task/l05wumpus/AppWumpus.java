@@ -15,17 +15,15 @@ public class AppWumpus {
                                   String arquivoMovimentos) {
       Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
       
-      
       //Construcao
       String cave[][] = tk.retrieveCave();
       MontadorDaCaverna bobMontador = new MontadorDaCaverna(cave);
       
-      if(bobMontador.montar()) { 
+      boolean montagemOK = bobMontador.montar();
+      if(montagemOK) { 
           ControleDoJogo controle = new ControleDoJogo();
           controle.conectaHeroi(bobMontador.getHeroi());
           controle.conectaWumpus(bobMontador.getWumpus());
-          
-    	  char command;
     	  
           if(arquivoMovimentos == null) { //modo interativo
         	  Scanner keyboard = new Scanner(System.in);
@@ -33,17 +31,24 @@ public class AppWumpus {
         	  controle.setNome(keyboard.nextLine());
         	  
         	  Impressao.estado(controle.getCaverna(), controle.getNome(), controle.getScore());
+    		  Impressao.inventario(controle.getHeroi());
 
         	  while(controle.getRodando()) {
-        		  command = keyboard.nextLine().charAt(0);
+        		  String command = keyboard.nextLine();
         		  int erro = controle.executa(command);
+        		  
         		  if(erro != 0) {
-        			  Impressao.mensagem("Movimento Inválido!");
+        			  Impressao.erro(erro);
         			  continue;
         		  }
+        		  
         		  Impressao.estado(controle.getCaverna(), controle.getNome(), controle.getScore());
+        		  Impressao.inventario(controle.getHeroi());
+        		  Impressao.mensagem("");
+        		  Impressao.imprimeMensagens();
         	  }
-        	  Impressao.mensagem("Volte sempre!! ;)");
+        	  
+        	  Impressao.fimDeJogo(controle.getStatus());
         	  keyboard.close();
           }
           else { // modo arquivo
@@ -52,7 +57,7 @@ public class AppWumpus {
         	  controle.setNome("Alcebiades");
         	  
         	  while(controle.getRodando()) {
-        		  command = movements.charAt(caracAtual++);
+        		  char command = movements.charAt(caracAtual++);
         		  int erro = controle.executa(command);
         		  if(erro != 0)
         			  continue;
@@ -64,7 +69,7 @@ public class AppWumpus {
           }
       }
       else { //arquivo zuado
-    	  Impressao.mensagem("Erro");
+    	  Impressao.mensagem("Erro na montagem do mapa.");
       }
       tk.stop();
    }

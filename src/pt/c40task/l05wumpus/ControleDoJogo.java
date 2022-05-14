@@ -18,6 +18,12 @@ public class ControleDoJogo {
 		this.status = 'P';
 	}
 	
+	public int executa(String command) {
+		if(command.length() != 1) // Comando inválido
+			return 2;
+		return executa(command.charAt(0));
+	}
+	
 	public int executa(char command) { 
 		command = Character.toLowerCase(command);
 		int saida = 0;
@@ -35,7 +41,7 @@ public class ControleDoJogo {
 				wumpusMorto = true;
 			}
 		}
-		else if(command == 'k') 
+		else if(command == 'k')
 			heroi.armarFlecha();
 		
 		else if(command == 'c') 
@@ -48,8 +54,8 @@ public class ControleDoJogo {
 			}
 			rodando = false; 
 		}
-		else 
-			saida = 1;
+		else // Comando invalido
+			saida = 2;
 		
 		if(!heroi.getVivo()){
 			pontuacao += -1000;
@@ -90,5 +96,9 @@ public class ControleDoJogo {
 	
 	public void conectaWumpus(Wumpus wumpus) {
 		this.wumpus = wumpus;
+	}
+
+	public Heroi getHeroi() {
+		return heroi;
 	}
 }

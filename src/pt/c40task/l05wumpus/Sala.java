@@ -3,28 +3,29 @@ import java.util.ArrayList;
 import pt.c40task.l05wumpus.componentes.Heroi;
 import pt.c40task.l05wumpus.componentes.Componente;
 
-public class Salas {
+public class Sala {
 	private ArrayList<Componente> componentes;
 	private boolean descoberta;
 	
-	public Salas() {
+	public Sala() {
 		this.componentes = new ArrayList<Componente>();
 		this.descoberta = false;
 	}
 	
 	public boolean inserirCompInicial(Componente aInserir) { 
 		boolean saida = true;
-		for(int i = 0;i < this.componentes.size();i++) { //tem outros casos??
+		for(int i = 0;i < this.componentes.size();i++) { 
+// acho q falta os casos W -> O, B -> W, B -> O, ja que cada if nao eh "comutativo", e n sei se precisa da verificacao P -> W
 			if(aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'W') {
 				saida = false;
 			}
-			if(aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'B') {
+			else if(aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'B') {
 				saida = false;
 			}
-			if(aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'B') {
+			else if(aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'B') {
 				saida = false;
 			}
-			if(aInserir.getSimbolo() == 'P' && componentes.get(i).getSimbolo() == 'W') {
+			else if(aInserir.getSimbolo() == 'P' && componentes.get(i).getSimbolo() == 'W') {
 				saida = false;
 			}
 		}
@@ -35,7 +36,7 @@ public class Salas {
 	}
 	
 	public void inserir(Componente aInserir) {
-		if(aInserir.getSimbolo() == 'P')
+		if(aInserir.getSimbolo() == 'P') // verifica se eh um heroi entrando na sala
 			this.descoberta = true;
 		this.componentes.add(aInserir);
 	}
@@ -47,9 +48,8 @@ public class Salas {
 	}
 	
 	public void interagir(Heroi heroi) {  
-		for(int i=0;i < componentes.size();i++) {
+		for(int i=0;i < componentes.size();i++)
 			componentes.get(i).interagir(heroi);
-		}
 	}
 	
 	public boolean getDescoberta() {
@@ -59,7 +59,7 @@ public class Salas {
 	public char getSimbolo() {
 		if(!descoberta) return '-';
 		int maior = -1;
-		char caractMaior = '#';
+		char caractMaior = '#'; // # tem prioridade -1
 		
 		for(int i=0;i < componentes.size();i++)
 			if(componentes.get(i).getPrioridade() > maior) {
@@ -68,9 +68,5 @@ public class Salas {
 			}
 		
 		return caractMaior;
-	}
-	
-	public boolean getTemComponentes() {
-		return this.componentes.size() > 0;
 	}
 }
