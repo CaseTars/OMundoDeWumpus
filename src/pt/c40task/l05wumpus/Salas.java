@@ -59,16 +59,15 @@ public class Salas {
 	public char getSimbolo() {
 		if(!descoberta) return '-';
 		int maior = -1;
-		char caract = '#';
-		for(int i=0;i < componentes.size();i++) {
-			maior = componentes.get(i).getPrioridade() > maior ? componentes.get(i).getPrioridade() : maior;
-		}
-		for(int i=0;i < componentes.size();i++) {
-			if(componentes.get(i).getPrioridade() == maior) {
-				caract = componentes.get(i).getSimbolo();
+		char caractMaior = '#';
+		
+		for(int i=0;i < componentes.size();i++)
+			if(componentes.get(i).getPrioridade() > maior) {
+				maior = componentes.get(i).getPrioridade();
+				caractMaior = componentes.get(i).getSimbolo();
 			}
-		}
-		return caract;
+		
+		return caractMaior;
 	}
 	
 	public boolean getTemComponentes() {

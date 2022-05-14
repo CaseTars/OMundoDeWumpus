@@ -18,10 +18,7 @@ public class Heroi extends SerVivo {
 	// --------------------------------- Movimentacao
 
 	public void mover(int xf, int yf) {
-		cave.mover(this, xf, yf);
-		x = xf;
-		y = yf;
-		
+		super.mover(xf, yf);
 		cave.interagir(this);
 		
 		if(flechaArmada) {
@@ -81,6 +78,10 @@ public class Heroi extends SerVivo {
 	
 	public void setOuro(Ouro ouro) {
 		this.ouro = ouro;
+	}
+	
+	public char[][] getMapa() {
+		return cave.getMapa();
 	}
 	
 	public boolean carregandoOuro() {

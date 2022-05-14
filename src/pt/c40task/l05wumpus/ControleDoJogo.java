@@ -67,7 +67,7 @@ public class ControleDoJogo {
 	}
 	
 	public char[][] getCaverna(){ 
-		char[][] caverna = heroi.getCaverna().getMapa();
+		char[][] caverna = heroi.getMapa();
 		return caverna;
 	}
 	
