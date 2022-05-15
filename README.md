@@ -2,4 +2,4 @@
 
 ## Arquivos Java sobre Jogo OMundoDeWumpus
 
-[Diretorio](pt/c40task/l05wumpus)
+[Diretorio](src/pt/c40task/l05wumpus/)
