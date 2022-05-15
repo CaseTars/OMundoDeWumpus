@@ -8,6 +8,8 @@ public abstract class Componente {
 	private char simbolo;
 	private int prioridadeSimbolo;
 	
+	public abstract void interagir(Heroi heroi);
+	
 	public Componente(int x, int y, char simbolo, int prioridade) {
 		this.x = x;
 		this.y = y;
@@ -44,6 +46,4 @@ public abstract class Componente {
 		x = xf;
 		y = yf;
 	}
-	
-	public abstract void interagir(Heroi heroi);
 }

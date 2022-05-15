@@ -77,9 +77,11 @@ public class Impressao {
 
 	public static void fimDeJogo(char status) {
 		if(status == 'W')
-			Impressao.mensagem("Voce Ganhou!! :D");
+			//Impressao.mensagem("Voce Ganhou!! :D");
+			Impressao.mensagem("Voce Ganhou =D !!!");
 		else if(status == 'L')
-			Impressao.mensagem("Voce Perdeu... D:");
+			//Impressao.mensagem("Voce Perdeu... D:");
+			Impressao.mensagem("Voce Perdeu =( ...");
 		else
 			Impressao.mensagem("Voce Sempre!");
 	}

@@ -4,25 +4,19 @@ import pt.c40task.l05wumpus.componentes.Wumpus;
 import pt.c40task.l05wumpus.componentes.Buraco;
 import pt.c40task.l05wumpus.componentes.Ouro;
 
-public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
+public class MontadorDaCaverna {
 	private String cave[][];
 	private Heroi heroi;
 	private Wumpus wumpus;
-	private Buraco[] buracos;
-	private Ouro ouro;
 	private Caverna caverna;
-	private int posBuracos;
-	private boolean posicoesOk;
 	
 	public MontadorDaCaverna(String cave[][]) { 
 		this.cave = cave;
-		this.buracos = new Buraco[3];
-		this.posBuracos = 0;
-		this.posicoesOk = true;
 	}
 	
 	public boolean montar() {
 		boolean saida = true;
+		int posBuracos = 0;
 		if(conferirArquivo()) {
 			criarCaverna();		
 			
@@ -37,14 +31,15 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 						saida = caverna.inserirCompInicial(heroi); 
 						break;
 					case "O":
-						this.ouro = new Ouro(posX, posY);  
-						this.ouro.conectaCaverna(caverna);
+						Ouro ouro = new Ouro(posX, posY);  
+						ouro.conectaCaverna(caverna);
 						saida = caverna.inserirCompInicial(ouro);
 						break;
 					case "B":
-						this.buracos[posBuracos] = new Buraco(posX, posY);
-						this.buracos[posBuracos].conectaCaverna(caverna);
-						this.buracos[posBuracos].criaBrisa();
+						Buraco[] buracos = new Buraco[3];
+						buracos[posBuracos] = new Buraco(posX, posY);
+						buracos[posBuracos].conectaCaverna(caverna);
+						buracos[posBuracos].criaBrisa();
 						saida = caverna.inserirCompInicial(buracos[posBuracos]); 
 						posBuracos += 1;
 						break;
@@ -64,6 +59,7 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 		}
 		return saida;
 	}
+	
 	public boolean conferirArquivo() {
 		int qtdBuracos = 0;
 		int qtdWumpus = 0;
@@ -71,16 +67,17 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 		int qtdHeroi = 0;
 		int posX;
 		int posY;
+		boolean posicoesOk = true;
 		
 		for(int i=0;i < cave.length;i++) {
 			posX = Integer.parseInt(cave[i][1]);  
 			posY = Integer.parseInt(cave[i][0]);
-			conferirPos(posX, posY);
+			posicoesOk = conferirPos(posX, posY);
 			
 			switch(cave[i][2]) {
 				case "P":
 					if(posX != 1 || posY != 1) {
-						this.posicoesOk = false;
+						posicoesOk = false;
 					}
 					qtdHeroi += 1;
 					break;
@@ -102,10 +99,11 @@ public class MontadorDaCaverna {   //n precisa ter todos , so o wumpus e heroi
 		return true;
 	}
 	
-	public void conferirPos(int posX, int posY) {
+	public boolean conferirPos(int posX, int posY) {
 		if(posX < 1 || posX > 4 || posY < 1 || posY > 4) {
-			this.posicoesOk = false;
+			return false;
 		}
+		return true;
 	}
 	
 	public void criarCaverna() {

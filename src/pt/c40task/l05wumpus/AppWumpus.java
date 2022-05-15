@@ -68,7 +68,7 @@ public class AppWumpus {
         	  }
           }
       }
-      else { //arquivo zuado
+      else { //arquivo de montagem inadequado
     	  Impressao.mensagem("Erro na montagem do mapa.");
       }
       tk.stop();

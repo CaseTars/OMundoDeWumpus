@@ -15,17 +15,20 @@ public class Sala {
 	public boolean inserirCompInicial(Componente aInserir) { 
 		boolean saida = true;
 		for(int i = 0;i < this.componentes.size();i++) { 
-// acho q falta os casos W -> O, B -> W, B -> O, ja que cada if nao eh "comutativo", e n sei se precisa da verificacao P -> W
-			if(aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'W') {
+			if((aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'W') 
+			|| (aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'O')) {
 				saida = false;
 			}
-			else if(aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'B') {
+			else if((aInserir.getSimbolo() == 'O' && componentes.get(i).getSimbolo() == 'B')
+				 || (aInserir.getSimbolo() == 'B' && componentes.get(i).getSimbolo() == 'O')) {
 				saida = false;
 			}
-			else if(aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'B') {
+			else if((aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'B')
+				 || (aInserir.getSimbolo() == 'B' && componentes.get(i).getSimbolo() == 'W')) {
 				saida = false;
 			}
-			else if(aInserir.getSimbolo() == 'P' && componentes.get(i).getSimbolo() == 'W') {
+			else if((aInserir.getSimbolo() == 'W' && componentes.get(i).getSimbolo() == 'P') 
+				 || (aInserir.getSimbolo() == 'P' && componentes.get(i).getSimbolo() == 'W')){
 				saida = false;
 			}
 		}
@@ -66,7 +69,6 @@ public class Sala {
 				maior = componentes.get(i).getPrioridade();
 				caractMaior = componentes.get(i).getSimbolo();
 			}
-		
 		return caractMaior;
 	}
 }

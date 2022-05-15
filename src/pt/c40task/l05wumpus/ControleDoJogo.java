@@ -3,13 +3,13 @@ import pt.c40task.l05wumpus.componentes.Heroi;
 import pt.c40task.l05wumpus.componentes.Wumpus;
 
 public class ControleDoJogo {
-	private String nomeJogador;
 	private int pontuacao;
 	private char status;
 	private boolean rodando;
 	private boolean wumpusMorto;
 	private Heroi heroi;
 	private Wumpus wumpus;
+	private String nomeJogador;
 	
 	public ControleDoJogo() {
 		this.pontuacao = 0;
@@ -19,7 +19,7 @@ public class ControleDoJogo {
 	}
 	
 	public int executa(String command) {
-		if(command.length() != 1) // Comando inválido
+		if(command.length() != 1) // Comando invalido
 			return 2;
 		return executa(command.charAt(0));
 	}
@@ -65,12 +65,12 @@ public class ControleDoJogo {
 		return saida;
 	}
 	
-	public boolean getRodando() { 
-		return rodando;
-	}
-	
 	public void setNome(String nome) {
 		this.nomeJogador = nome;
+	}
+	
+	public boolean getRodando() { 
+		return rodando;
 	}
 	
 	public String getNome() {
@@ -85,6 +85,10 @@ public class ControleDoJogo {
 		return pontuacao;
 	}
 	
+	public Heroi getHeroi() {
+		return heroi;
+	}
+	
 	public char[][] getCaverna(){ 
 		char[][] caverna = heroi.getMapa();
 		return caverna;
@@ -96,9 +100,5 @@ public class ControleDoJogo {
 	
 	public void conectaWumpus(Wumpus wumpus) {
 		this.wumpus = wumpus;
-	}
-
-	public Heroi getHeroi() {
-		return heroi;
 	}
 }
