@@ -17,6 +17,10 @@ public abstract class Componente {
 		this.prioridadeSimbolo = prioridade;
 	}
 	
+	public boolean insereNaCaverna() {
+		return cave.inserirCompInicial(this);
+	}
+	
 	public Caverna getCaverna() {
 		return cave;
 	}

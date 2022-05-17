@@ -28,26 +28,26 @@ public class MontadorDaCaverna {
 					case "P":
 						this.heroi = new Heroi(posX, posY); 
 						this.heroi.conectaCaverna(caverna);
-						saida = caverna.inserirCompInicial(heroi); 
+						saida = heroi.insereNaCaverna();
 						break;
 					case "O":
 						Ouro ouro = new Ouro(posX, posY);  
 						ouro.conectaCaverna(caverna);
-						saida = caverna.inserirCompInicial(ouro);
+						saida = ouro.insereNaCaverna();
 						break;
 					case "B":
 						Buraco[] buracos = new Buraco[3];
 						buracos[posBuracos] = new Buraco(posX, posY);
 						buracos[posBuracos].conectaCaverna(caverna);
 						buracos[posBuracos].criaBrisa();
-						saida = caverna.inserirCompInicial(buracos[posBuracos]); 
+						saida = buracos[posBuracos].insereNaCaverna();
 						posBuracos += 1;
 						break;
 					case "W":
 						this.wumpus = new Wumpus(posX, posY);
 						this.wumpus.conectaCaverna(caverna);
 						this.wumpus.criaFedor();
-						saida = caverna.inserirCompInicial(wumpus);
+						saida = wumpus.insereNaCaverna();
 						break;
 					default:
 						break;
