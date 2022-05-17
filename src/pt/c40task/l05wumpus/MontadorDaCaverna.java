@@ -69,7 +69,7 @@ public class MontadorDaCaverna {
 		int posY;
 		boolean posicoesOk = true;
 		
-		for(int i=0;i < cave.length;i++) {
+		for(int i=0;i < cave.length && posicoesOk;i++) {
 			posX = Integer.parseInt(cave[i][1]);  
 			posY = Integer.parseInt(cave[i][0]);
 			posicoesOk = conferirPos(posX, posY);
@@ -94,8 +94,9 @@ public class MontadorDaCaverna {
 					break;
 			}
 		}
-		if(qtdBuracos < 2 || qtdBuracos > 3 || qtdWumpus != 1 || qtdHeroi != 1 || qtdOuro != 1 || !posicoesOk)
+		if(qtdBuracos < 2 || qtdBuracos > 3 || qtdWumpus != 1 || qtdHeroi != 1 || qtdOuro != 1 || !posicoesOk) {
 			return false;
+		}
 		return true;
 	}
 	
