@@ -5,7 +5,7 @@ public class AppWumpus {
 
    public static void main(String[] args) {
       AppWumpus.executaJogo(
-            (args.length > 0) ? args[0] : null,
+    		(args.length > 0) ? args[0] : null,
             (args.length > 1) ? args[1] : null,
             (args.length > 2) ? args[2] : null);
       
@@ -24,8 +24,9 @@ public class AppWumpus {
           ControleDoJogo controle = new ControleDoJogo();
           controle.conectaHeroi(bobMontador.getHeroi());
           controle.conectaWumpus(bobMontador.getWumpus());
-    	  
-          if(arquivoMovimentos == null) { //modo interativo
+    	  boolean teste = false;
+          //arquivoMovimentos == null
+          if(teste) { //modo interativo
         	  Scanner keyboard = new Scanner(System.in);
         	  Impressao.pegarNome();
         	  controle.setNome(keyboard.nextLine());
@@ -51,13 +52,16 @@ public class AppWumpus {
         	  Impressao.fimDeJogo(controle.getStatus());
         	  keyboard.close();
           }
+   
           else { // modo arquivo
-        	  String movements = tk.retrieveMovements();
-        	  int caracAtual = 0;
+        	  //String movements = tk.retrieveMovements();
+        	  String movements = "ddkscwaa";
+        	  int caracAtual = 1;
         	  controle.setNome("Alcebiades");
         	  
-        	  while(controle.getRodando()) {
+        	  while(controle.getRodando() && caracAtual < movements.length()) {
         		  char command = movements.charAt(caracAtual++);
+        		  System.out.println(command);
         		  int erro = controle.executa(command);
         		  if(erro != 0)
         			  continue;
