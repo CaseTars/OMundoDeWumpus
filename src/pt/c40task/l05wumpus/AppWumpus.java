@@ -63,7 +63,6 @@ public class AppWumpus {
     		  
         	  while(controle.getRodando() && caracAtual < movements.length()) {
         		  char command = movements.charAt(caracAtual++);
-        		  System.out.println(command);
         		  int erro = controle.executa(command);
         		  if(erro != 0)
         			  continue;
