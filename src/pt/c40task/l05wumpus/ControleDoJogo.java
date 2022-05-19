@@ -48,10 +48,6 @@ public class ControleDoJogo {
 			heroi.pegarOuro();
 		
 		else if(command == 'q') {
-			if(heroi.carregandoOuro() && heroi.getX() == 0 && heroi.getY() == 0) {
-				pontuacao += 1000;
-				status = 'W';
-			}
 			rodando = false; 
 		}
 		else // Comando invalido
@@ -61,6 +57,11 @@ public class ControleDoJogo {
 			pontuacao += -1000;
 			rodando = false;
 			status = 'L';
+		}
+		if(heroi.carregandoOuro() && heroi.getX() == 0 && heroi.getY() == 0) {
+			pontuacao += 1000;
+			status = 'W';
+			rodando = false;
 		}
 		return saida;
 	}

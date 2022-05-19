@@ -9,11 +9,10 @@ public class Impressao {
 	
 	public static void estado(char[][] caverna, String player, int score) {
 		System.out.println(' ');
-		for(int y=0;y < 4;y++) {
-			for(int x=0;x < 4;x++) {
-				System.out.print("" + caverna[x][y] + (x != 3 ? ' ' : '\n'));
-			}
-		}
+		for(int y=0;y < 4;y++) 
+			for(int x=0;x < 4;x++) 
+				System.out.print("" + caverna[y][x] + (x != 3 ? ' ' : '\n'));
+
 		player(player);
 		score(score);
 	}
@@ -83,6 +82,6 @@ public class Impressao {
 			//Impressao.mensagem("Voce Perdeu... D:");
 			Impressao.mensagem("Voce Perdeu =( ...");
 		else
-			Impressao.mensagem("Voce Sempre!");
+			Impressao.mensagem("Volte Sempre!");
 	}
 }

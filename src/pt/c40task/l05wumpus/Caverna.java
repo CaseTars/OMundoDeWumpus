@@ -40,7 +40,7 @@ public class Caverna {
 		char[][] mapa = new char[4][4];
 		for(int x=0;x < 4;x++)
 			for(int y=0;y < 4;y++)
-				mapa[x][y] = salas[x][y].getSimbolo();
+				mapa[y][x] = salas[x][y].getSimbolo(); 
 		return mapa;
 	}
 }
